@@ -95,13 +95,14 @@ Base.metadata.create_all(bind=engine)
 #   to make requests to this server."
 #
 # WARNING: In production, change "*" to your actual frontend domain!
+import os
+
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "*")
+origins = [o.strip() for o in allowed_origins_env.split(",")] if allowed_origins_env != "*" else ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",   # Vite dev server default
-        "http://localhost:3000",   # Alternative React dev server
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],       # Allow GET, POST, PUT, DELETE, PATCH, OPTIONS
     allow_headers=["*"],       # Allow all HTTP headers
