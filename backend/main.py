@@ -128,20 +128,14 @@ app.include_router(jobs.router,     prefix="/jobs",     tags=["⚙️  Jobs"])
 app.include_router(generate.router, prefix="/generate", tags=["📄 Word Generation"])
 
 # =============================================================================
-# Step 5: Health Check Endpoint
+# Step 5: Mount Frontend Static Files & Health Endpoints
 # =============================================================================
-@app.get("/", tags=["Health"])
-def root():
-    """
-    Simple health check endpoint.
-    Useful to verify the API is running before making other requests.
-    """
-    return {
-        "status": "✅ Financial Reconciler API is running",
-        "docs": "Visit /docs for interactive API documentation",
-        "version": "1.0.0"
-    }
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
+# Path to the compiled frontend dist directory
+FRONTEND_DIST = Path(__file__).parent.parent / "frontend" / "dist"
 
 @app.get("/health", tags=["Health"])
 def health_check():
@@ -159,3 +153,16 @@ def health_check():
         "api": "running",
         "database": db_status
     }
+
+# If the frontend has been built (frontend/dist exists), serve the React application!
+if FRONTEND_DIST.exists():
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIST), html=True), name="static")
+else:
+    @app.get("/", tags=["Health"])
+    def root():
+        """Fallback health check endpoint when frontend is not built."""
+        return {
+            "status": "✅ Financial Reconciler API is running",
+            "docs": "Visit /docs for interactive API documentation",
+            "version": "1.0.0"
+        }

@@ -30,7 +30,7 @@
 //    Prevents functions from being recreated on every render.
 // =============================================================================
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import type { ReconciliationResponse, CompanyResult, FieldDiff, ResultFilters } from '../types';
 
 interface DiffTableProps {

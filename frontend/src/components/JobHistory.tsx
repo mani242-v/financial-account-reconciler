@@ -1,7 +1,6 @@
 // =============================================================================
 // components/JobHistory.tsx — List of Past Reconciliation Jobs
 // =============================================================================
-import React from 'react';
 import type { Job } from '../types';
 
 interface JobHistoryProps {

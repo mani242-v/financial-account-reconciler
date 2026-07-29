@@ -28,7 +28,7 @@
 //   - uploadedFiles: files uploaded in the current session
 // =============================================================================
 
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './App.css';
 
 import type { Job, UploadedFiles, ReconciliationResponse } from './types';

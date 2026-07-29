@@ -3,7 +3,7 @@
 // =============================================================================
 import React, { useState } from 'react';
 import type { Job } from '../types';
-import { generateFiles, listGeneratedFiles, getFileDownloadUrl, updateJobTemplate } from '../api/client';
+import { generateFiles, listGeneratedFiles, getFileDownloadUrl } from '../api/client';
 
 interface GeneratePanelProps {
   job: Job;

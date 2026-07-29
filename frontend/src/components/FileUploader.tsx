@@ -40,7 +40,7 @@
 //    This is async, so we use async/await in the callback.
 // =============================================================================
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import type { UploadedFiles, UploadResponse } from '../types';
 import { uploadParentFile, uploadChildFile, uploadTemplateFile, getSampleTemplateUrl } from '../api/client';

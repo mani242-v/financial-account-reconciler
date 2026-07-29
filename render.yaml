@@ -1,24 +1,11 @@
 services:
-  # 1. FastAPI Backend Web Service
+  # Single Unified Service: Serves both React Web UI & FastAPI Backend from one link!
   - type: web
-    name: financial-reconciler-backend
+    name: financial-account-reconciler
     env: python
     region: oregon
-    buildCommand: cd backend && python -m pip install --upgrade pip setuptools wheel && pip install -r requirements.txt && python create_sample_data.py
+    buildCommand: cd frontend && npm install && npm run build && cd ../backend && python -m pip install --upgrade pip setuptools wheel && pip install -r requirements.txt && python create_sample_data.py
     startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: ALLOWED_ORIGINS
         value: "*"
-
-  # 2. React Frontend Static Site
-  - type: web
-    name: financial-reconciler-frontend
-    env: static
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: ./frontend/dist
-    envVars:
-      - key: VITE_API_BASE_URL
-        fromService:
-          type: web
-          name: financial-reconciler-backend
-          property: host
