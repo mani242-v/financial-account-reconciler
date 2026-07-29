@@ -1,0 +1,23 @@
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Python / Backend
+**/__pycache__/
+*.pyc
+.pytest_cache/
+backend/reconciler.db
+
+# Uploads & Outputs
+backend/uploads/*
+!backend/uploads/sample_*
+backend/outputs/*
+!.gitkeep
+
+# Environments & OS
+.env
+.env.local
+.vscode/
+.idea/
+*.log
+.DS_Store
