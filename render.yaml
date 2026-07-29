@@ -14,7 +14,6 @@ services:
   - type: web
     name: financial-reconciler-frontend
     env: static
-    region: oregon
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
@@ -22,4 +21,4 @@ services:
         fromService:
           type: web
           name: financial-reconciler-backend
-          property: url
+          property: host

@@ -51,8 +51,10 @@ import type {
 // By creating an "instance", we can set default config once:
 // - baseURL: all requests will start with this (no need to repeat "http://localhost:8000")
 // - timeout: abort request if it takes longer than 30 seconds
-// Use environment variable for production API URL, or default to localhost:8000 for local dev
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const rawApiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = rawApiUrl.startsWith('http://') || rawApiUrl.startsWith('https://')
+  ? rawApiUrl
+  : `https://${rawApiUrl}`;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
