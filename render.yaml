@@ -4,7 +4,7 @@ services:
     name: financial-reconciler-backend
     env: python
     region: oregon
-    buildCommand: cd backend && pip install -r requirements.txt && python create_sample_data.py
+    buildCommand: cd backend && python -m pip install --upgrade pip setuptools wheel && pip install -r requirements.txt && python create_sample_data.py
     startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: ALLOWED_ORIGINS
